@@ -60,6 +60,9 @@ int main(int argc, const char *argv[])
         //// TASK MP.1 -> replace the following code with ring buffer of size dataBufferSize
 
         // push image into data frame buffer
+        if (dataBuffer.size() >= dataBufferSize)
+            dataBuffer.erase(dataBuffer.begin());
+        
         DataFrame frame;
         frame.cameraImg = imgGray;
         dataBuffer.push_back(frame);
