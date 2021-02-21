@@ -11,26 +11,33 @@ void matchDescriptors(std::vector<cv::KeyPoint> &kPtsSource, std::vector<cv::Key
     bool crossCheck = false;
     cv::Ptr<cv::DescriptorMatcher> matcher;
 
+    cv::Mat descSourceCopy = descSource.clone();
+    cv::Mat descRefCopy = descRef.clone();
     if (matcherType.compare("MAT_BF") == 0)
     {
-        int normType = cv::NORM_HAMMING;
+        int normType = descriptorType.compare("DES_BINARY") == 0 ? cv::NORM_HAMMING : cv::NORM_L2;
         matcher = cv::BFMatcher::create(normType, crossCheck);
     }
     else if (matcherType.compare("MAT_FLANN") == 0)
     {
-        // ...
+        if (descriptorType.compare("DES_BINARY") == 0) {
+            descSource.convertTo(descSourceCopy, CV_32F);
+            descRef.convertTo(descRefCopy, CV_32F);
+        }
+        matcher = cv::FlannBasedMatcher::create();
     }
 
     // perform matching task
     if (selectorType.compare("SEL_NN") == 0)
     { // nearest neighbor (best match)
-
-        matcher->match(descSource, descRef, matches); // Finds the best match for each descriptor in desc1
+        matcher->match(descSourceCopy, descRefCopy, matches); // Finds the best match for each descriptor in desc1
     }
     else if (selectorType.compare("SEL_KNN") == 0)
     { // k nearest neighbors (k=2)
-
-        // ...
+        std::vector<std::vector<cv::DMatch>> knn_matches;
+        matcher->knnMatch(descSourceCopy, descRefCopy, knn_matches, 2);
+        for (auto m : knn_matches)
+            matches.push_back(m[0]);
     }
 }
 

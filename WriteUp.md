@@ -64,6 +64,10 @@ I used an `if/else` statement to decide between the variour `FeatureDetector` in
 
 *Implement FLANN matching as well as k-nearest neighbor selection. Both methods must be selectable using the respective strings in the main function.*
 
+I implemented the FLANN matching in the `matchDescriptors` function. As it only supports floating point input, I had to convert the binary descriptors to floating point ones. Similarly I had to use different norms in the brute force method.
+
+To implement the k-nearest neighbor method it was enough to use the `knnMatch` method instead of the `match` one. I also selected the first match as the resulting match.
+
 ## MP.6 Descriptor Distance Ratio
 
 *Use the K-Nearest-Neighbor matching to implement the descriptor distance ratio test, which looks at the ratio of best vs. second-best match to decide whether to keep an associated pair of keypoints.*
