@@ -72,6 +72,8 @@ To implement the k-nearest neighbor method it was enough to use the `knnMatch` m
 
 *Use the K-Nearest-Neighbor matching to implement the descriptor distance ratio test, which looks at the ratio of best vs. second-best match to decide whether to keep an associated pair of keypoints.*
 
+To implement this task I simply added an `if` statement making sure the ratio between the best vs. second best match distances is lower then a threshold of `0.8`.
+
 ## MP.7 Performance Evaluation 1
 
 *Count the number of keypoints on the preceding vehicle for all 10 images and take note of the distribution of their neighborhood size. Do this for all the detectors you have implemented.*

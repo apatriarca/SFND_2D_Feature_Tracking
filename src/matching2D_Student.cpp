@@ -37,7 +37,8 @@ void matchDescriptors(std::vector<cv::KeyPoint> &kPtsSource, std::vector<cv::Key
         std::vector<std::vector<cv::DMatch>> knn_matches;
         matcher->knnMatch(descSourceCopy, descRefCopy, knn_matches, 2);
         for (auto m : knn_matches)
-            matches.push_back(m[0]);
+            if ((m[0].distance / m[1].distance) < 0.8)
+                matches.push_back(m[0]);
     }
 }
 
