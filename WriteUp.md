@@ -58,6 +58,8 @@ I have used the `erase/remove_if` pattern to delete the keypoints that are outsi
 
 *Implement descriptors BRIEF, ORB, FREAK, AKAZE and SIFT and make them selectable by setting a string accordingly.*
 
+I used an `if/else` statement to decide between the variour `FeatureDetector` instances. I used the default arguments for all the constructors.
+
 ## MP.5 Descriptor Matching
 
 *Implement FLANN matching as well as k-nearest neighbor selection. Both methods must be selectable using the respective strings in the main function.*
