@@ -52,6 +52,8 @@ The following images show the keypoints detected in the last frame using the dif
 
 *Remove all keypoints outside of a pre-defined rectangle and only use the keypoints within the rectangle for further processing.*
 
+I have used the `erase/remove_if` pattern to delete the keypoints that are outside the given rectangle.
+
 ## MP.4 Keypoint Descriptors
 
 *Implement descriptors BRIEF, ORB, FREAK, AKAZE and SIFT and make them selectable by setting a string accordingly.*

@@ -6,6 +6,7 @@
 #include <vector>
 #include <cmath>
 #include <limits>
+#include <algorithm>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -101,7 +102,12 @@ int main(int argc, const char *argv[])
         cv::Rect vehicleRect(535, 180, 180, 150);
         if (bFocusOnVehicle)
         {
-            // ...
+            keypoints.erase(std::remove_if(keypoints.begin(),
+                                           keypoints.end(),
+                                           [&vehicleRect](const cv::KeyPoint &p) {
+                                               return !vehicleRect.contains(p.pt);
+                                           }),
+                            keypoints.end());
         }
 
         //// EOF STUDENT ASSIGNMENT
